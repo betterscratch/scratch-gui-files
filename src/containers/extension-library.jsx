@@ -42,7 +42,7 @@ const translateGalleryItem = (extension, locale) => ({
 let cachedGallery = null;
 
 const fetchLibrary = async () => {
-    const res = await fetch('https://techguy16.github.io/betterscratch/generated-metadata/extensions-v0.json');
+    const res = await fetch('https://betterscratch.github.io/extensions/generated-metadata/extensions-v0.json');
     if (!res.ok) {
         throw new Error(`HTTP status ${res.status}`);
     }
@@ -53,9 +53,9 @@ const fetchLibrary = async () => {
         description: extension.description,
         descriptionTranslations: extension.descriptionTranslations || {},
         extensionId: extension.id,
-        extensionURL: `https://techguy16.github.io/betterscratch/${extension.slug}.js`,
-        iconURL: `https://techguy16.github.io/betterscratch/${extension.image || 'images/unknown.svg'}`,
-        tags: ['betterscratch'],
+        extensionURL: `https://betterscratch.github.io/extensions/${extension.slug}.js`,
+        iconURL: `https://betterscratch.github.io/extensions/${extension.image || 'images/unknown.svg'}`,
+        tags: extension.tags,
         credits: [
             ...(extension.by || []),
             ...(extension.original || [])

@@ -25,6 +25,7 @@ const isTrustedExtension = url => (
     url.startsWith('https://extensions.turbowarp.org/') ||
     
     url.startsWith('https://techguy16.github.io/betterscratch/')  ||
+    url.startsWith('https://betterscratch.github.io/extensions/') ||
     // For development.
     url.startsWith('http://localhost:8000/') ||
 
@@ -54,6 +55,7 @@ const isAlwaysTrustedForFetching = parsed => (
     // Any TurboWarp service such as trampoline
     parsed.origin === 'https://turbowarp.org' ||
     parsed.origin === 'https://techguy16.github.io' ||
+    parsed.origin === 'https://betterscratch.github.io' ||
     parsed.origin.endsWith('.turbowarp.org') ||
     parsed.origin.endsWith('.turbowarp.xyz') ||
 
