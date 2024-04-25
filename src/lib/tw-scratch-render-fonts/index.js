@@ -1,12 +1,12 @@
 /* eslint-disable import/no-commonjs */
 
 const SansSerif = require('./NotoSans-Medium.ttf');
-const Serif = require('./SourceSerifPro-Regular.ttf');
+const Serif = require('./SourceSerifPro-Regular.otf');
 const Handwriting = require('./handlee-regular.ttf');
 const Marker = require('./Knewave.ttf');
 const Curly = require('./Griffy-Regular.ttf');
 const Pixel = require('./Grand9K-Pixel.ttf');
-const Scratch = require('./ScratchSavers_b2.ttf');
+const Scratch = require('./Scratch.ttf');
 const log = require('../log').default;
 
 const fontSource = {
