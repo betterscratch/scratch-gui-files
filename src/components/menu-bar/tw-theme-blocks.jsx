@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import check from './check.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import {MenuItem, Submenu} from '../menu/menu.jsx';
-import {BLOCKS_CUSTOM, BLOCKS_DARK, BLOCKS_HIGH_CONTRAST, BLOCKS_THREE, Theme} from '../../lib/themes/index.js';
+import {BLOCKS_CUSTOM, BLOCKS_DARK, BLOCKS_HIGHCONTRAST, BLOCKS_THREE, BLOCKS_ULTRADARK, Theme} from '../../lib/themes/index.js';
 import {openBlocksThemeMenu, blocksThemeMenuOpen, closeSettingsMenu} from '../../reducers/menus.js';
 import {setTheme} from '../../reducers/theme.js';
 import {persistTheme} from '../../lib/themes/themePersistance.js';
@@ -25,15 +25,22 @@ const options = defineMessages({
         id: 'tw.blockColors.three'
     },
     [BLOCKS_DARK]: {
-        defaultMessage: 'Dark (Beta)',
+        defaultMessage: 'Dark',
         description: 'Name of the dark block colors',
         id: 'tw.blockColors.dark'
+    },
+    [BLOCKS_ULTRADARK]: {
+        defaultMessage: 'Ultra Dark',
+        description: 'Name of the ultra dark block colors',
+        id: 'tw.blockColors.ultradark'
     }
 });
 
 const icons = {
     [BLOCKS_THREE]: threeIcon,
-    [BLOCKS_DARK]: darkIcon
+    [BLOCKS_HIGHCONTRAST]: highContrastIcon,
+    [BLOCKS_DARK]: darkIcon,
+    [BLOCKS_ULTRADARK]: darkIcon
 };
 
 const ThemeIcon = ({id}) => (
@@ -108,7 +115,7 @@ const BlocksThemeMenu = ({
             />
         </div>
         <Submenu place={isRtl ? 'left' : 'right'}>
-            {[BLOCKS_THREE, BLOCKS_DARK].map(i => (
+            {[BLOCKS_THREE, BLOCKS_DARK, BLOCKS_ULTRADARK].map(i => (
                 <ThemeMenuItem
                     key={i}
                     id={i}

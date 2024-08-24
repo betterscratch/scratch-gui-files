@@ -42,7 +42,7 @@ const translateGalleryItem = (extension, locale) => ({
 let cachedGallery = null;
 
 const fetchLibrary = async () => {
-    const res = await fetch('https://betterscratch.github.io/extensions/generated-metadata/extensions-v0.json');
+    const res = await fetch('https://betterscratch.github.io/extensions/generated-metadata/1.4.0.json');
     if (!res.ok) {
         throw new Error(`HTTP status ${res.status}`);
     }

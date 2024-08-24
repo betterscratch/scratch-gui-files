@@ -3,20 +3,25 @@ import defaultsDeep from 'lodash.defaultsdeep';
 import * as accentPurple from './accent/purple';
 import * as accentBlue from './accent/blue';
 import * as accentRed from './accent/red';
+import * as accentRainbow from './accent/rainbow';
 
 import * as guiLight from './gui/light';
 import * as guiDark from './gui/dark';
 
 import * as blocksThree from './blocks/three';
+import * as blocksContrast from './blocks/high-contrast';
 import * as blocksDark from './blocks/dark';
+import * as blocksUltraDark from './blocks/ultradark';
 
 const ACCENT_PURPLE = 'purple';
 const ACCENT_BLUE = 'blue';
 const ACCENT_RED = 'red';
+const ACCENT_RAINBOW = 'rainbow';
 const ACCENT_MAP = {
     [ACCENT_PURPLE]: accentPurple,
     [ACCENT_BLUE]: accentBlue,
-    [ACCENT_RED]: accentRed
+    [ACCENT_RED]: accentRed,
+    [ACCENT_RAINBOW]: accentRainbow
 };
 const ACCENT_DEFAULT = ACCENT_PURPLE;
 
@@ -29,7 +34,10 @@ const GUI_MAP = {
 const GUI_DEFAULT = GUI_LIGHT;
 
 const BLOCKS_THREE = 'three';
+const BLOCKS_HIGHCONTRAST = 'highcontrast';
 const BLOCKS_DARK = 'dark';
+const BLOCKS_ULTRADARK = 'ultradark';
+
 const BLOCKS_CUSTOM = 'custom';
 const BLOCKS_DEFAULT = BLOCKS_THREE;
 const defaultBlockColors = blocksThree.blockColors;
@@ -41,11 +49,25 @@ const BLOCKS_MAP = {
         customExtensionColors: {},
         useForStage: true
     },
+    [BLOCKS_HIGHCONTRAST]: {
+        blocksMediaFolder: 'blocks-media/default',
+        colors: blocksContrast.blockColors,
+        extensions: blocksContrast.extensions,
+        customExtensionColors: {},
+        useForStage: true
+    },
     [BLOCKS_DARK]: {
         blocksMediaFolder: 'blocks-media/default',
         colors: defaultsDeep({}, blocksDark.blockColors, defaultBlockColors),
         extensions: blocksDark.extensions,
         customExtensionColors: blocksDark.customExtensionColors,
+        useForStage: false
+    },
+    [BLOCKS_ULTRADARK]: {
+        blocksMediaFolder: 'blocks-media/default',
+        colors: defaultsDeep({}, blocksUltraDark.blockColors, defaultBlockColors),
+        extensions: blocksUltraDark.extensions,
+        customExtensionColors: blocksUltraDark.customExtensionColors,
         useForStage: false
     },
     [BLOCKS_CUSTOM]: {
@@ -137,6 +159,7 @@ export {
     ACCENT_RED,
     ACCENT_PURPLE,
     ACCENT_BLUE,
+    ACCENT_RAINBOW,
     ACCENT_MAP,
 
     GUI_LIGHT,
@@ -144,7 +167,9 @@ export {
     GUI_MAP,
 
     BLOCKS_THREE,
+    BLOCKS_HIGHCONTRAST,
     BLOCKS_DARK,
+    BLOCKS_ULTRADARK,
     BLOCKS_CUSTOM,
     BLOCKS_MAP
 };
