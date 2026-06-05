@@ -55,10 +55,10 @@ const fetchLibrary = async () => {
         extensionId: extension.id,
         extensionURL: `https://betterscratch.github.io/extensions/${extension.slug}.js`,
         iconURL: `https://betterscratch.github.io/extensions/${extension.image || 'images/unknown.svg'}`,
-        tags: extension.tags,
+        tags: Array.isArray(extension.tags) ? extension.tags : [extension.tags],
         credits: [
-            ...(extension.by || []),
-            ...(extension.original || [])
+            ...(extension.original || []),
+            ...(extension.by || [])
         ].map(credit => {
             if (credit.link) {
                 return (
@@ -66,6 +66,7 @@ const fetchLibrary = async () => {
                         href={credit.link}
                         target="_blank"
                         rel="noreferrer"
+                        key={credit.name}
                     >
                         {credit.name}
                     </a>
@@ -75,10 +76,10 @@ const fetchLibrary = async () => {
         }),
         docsURI: extension.docs ? `https://extensions.turbowarp.org/${extension.slug}` : null,
         samples: extension.samples ? extension.samples.map(sample => ({
-            href: `${process.env.ROOT}editor?project_url=https://techguy16.github.io/betterscratch/samples/${encodeURIComponent(sample)}.sb3`,
+            href: `${process.env.ROOT}editor?project_url=https://extensions.turbowarp.org/samples/${encodeURIComponent(sample)}.sb3`,
             text: sample
         })) : null,
-        incompatibleWithScratch: true,
+        incompatibleWithScratch: !extension.scratchCompatible,
         featured: true
     }));
 };
@@ -165,6 +166,7 @@ class ExtensionLibrary extends React.PureComponent {
                 const locale = this.props.intl.locale;
                 library.push(
                     ...this.state.gallery
+                        .filter(i => i.extensionId !== 'faceSensing')
                         .map(i => translateGalleryItem(i, locale))
                         .map(toLibraryItem)
                 );

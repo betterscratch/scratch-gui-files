@@ -115,18 +115,17 @@ class LibraryComponent extends React.Component {
         this.props.onRequestClose();
     }
     handleTagClick (tag) {
-        console.log(tag);
         if (this.state.playingItem === null) {
             this.setState({
                 filterQuery: '',
-                selectedTag: tag
+                selectedTag: tag.toLowerCase()
             });
         } else {
             this.props.onItemMouseLeave(this.getFilteredData()[[this.state.playingItem]]);
             this.setState({
                 filterQuery: '',
                 playingItem: null,
-                selectedTag: tag
+                selectedTag: tag.toLowerCase()
             });
         }
     }
@@ -212,7 +211,7 @@ class LibraryComponent extends React.Component {
         if (this.state.selectedTag !== 'all') {
             filteredItems = filteredItems.filter(dataItem => (
                 dataItem.tags &&
-                dataItem.tags.map(i => i).includes(this.state.selectedTag)
+                dataItem.tags.map(i => i.toLowerCase()).includes(this.state.selectedTag)
             ));
         }
 
@@ -230,7 +229,13 @@ class LibraryComponent extends React.Component {
                     }
                 }
                 if (dataItem.description) {
-                    search.push(dataItem.description);
+                    if (typeof dataItem.description === 'string') {
+                        search.push(dataItem.description);
+                    } else {
+                        search.push(this.props.intl.formatMessage(dataItem.description.props, {
+                            APP_NAME
+                        }));
+                    }
                 }
                 return search
                     .join('\n')
@@ -278,7 +283,7 @@ class LibraryComponent extends React.Component {
                             <div className={styles.tagWrapper}>
                                 {tagListPrefix.concat(this.props.tags).map((tagProps, id) => (
                                     <TagButton
-                                        active={this.state.selectedTag === tagProps.tag}
+                                        active={this.state.selectedTag === tagProps.tag.toLowerCase()}
                                         className={classNames(
                                             styles.filterBarItem,
                                             styles.tagButton,
